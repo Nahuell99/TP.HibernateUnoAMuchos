@@ -11,5 +11,6 @@
 		<many-to-one name="cliente" class="datos.Cliente"
 			column="idCliente" not-null="true" />
 			
+			
 	</class>
 </hibernate-mapping>

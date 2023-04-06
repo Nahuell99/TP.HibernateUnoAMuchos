@@ -17,6 +17,7 @@
 			<key column="idCliente" not-null="true" />
 			<one-to-many class="datos.Prestamo" />
 
+
 		</set>
 	</class>
 </hibernate-mapping>

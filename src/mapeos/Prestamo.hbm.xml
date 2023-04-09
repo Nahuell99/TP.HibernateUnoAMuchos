@@ -9,11 +9,16 @@
 		<property column="monto" name="monto" type="double" /> <!-- Tube que cambiar el Type de Long a Double porque sino no anda-->
 		<property column="interes" name="interes" type="double" />
 		<property column="cantCuotas" name="cantCuotas" type="int" />
-		
-		
+		<property column="cancelado" name="cancelado" type="boolean" />
 		
 		<many-to-one name="cliente" class="datos.Cliente"
 			column="idCliente" not-null="true" />
 			
+		<set name="cuota" cascade="save-update" table="cuota" order-by="idCuota asc"
+			inverse="true" lazy="true" fetch="select">
+			<key column="idPrestamo" not-null="true" />
+			<one-to-many class="datos.Cuota" />
+		</set>
+		
 	</class>
 </hibernate-mapping>

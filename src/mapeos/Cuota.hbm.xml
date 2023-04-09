@@ -2,15 +2,22 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="datos.Cuota" table="cuota">
+		<id column="idCuota" name="idCuota">
+			<generator class="identity" />
+		</id>
+		<property column="nroCuota" name="nroCuota" type="int" />
 		<property column="fechaVencimiento" name="fechaVencimiento" type="LocalDate" />
 		<property column="saldoPendiente" name="saldoPendiente" type="double" />
-		<property column="monto" name="monto" type="double" /> <!-- Tube que cambiar el Type de Long a Double porque sino no anda-->
-		<property column="interes" name="interes" type="double" />
-		<property column="cantCuotas" name="cantCuotas" type="int" />
-		
-		<many-to-one name="cliente" class="datos.Cliente"
-			column="idCliente" not-null="true" />
-			
+		<property column="amortizacion" name="amortizacion" type="double" />
+		<property column="interesCuota" name="interesCuota" type="double" />
+		<property column="cuota" name="cuota" type="double" />
+		<property column="deuda" name="deuda" type="double" />
+		<property column="cancelada" name="cancelada" type="boolean" />
+		<property column="fechaDePago" name="fechaDePago" type="LocalDate" />
+		<property column="punitorios" name="punitorios" type="double" />
+	
+		<many-to-one name="prestamo" class="datos.Prestamo"
+			column="idPrestamo" not-null="true" />
 			
 	</class>
 </hibernate-mapping>

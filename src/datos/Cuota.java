@@ -3,6 +3,7 @@ package datos;
 import java.time.LocalDate;
 
 public class Cuota {
+	private long idCuota;
 	private int nroCuota;
 	private LocalDate fechaVencimiento;
 	private double saldoPendiente;
@@ -34,7 +35,14 @@ public class Cuota {
 		this.fechaDePago = fechaDePago;
 		this.punitorios = punitorios;
 		this.prestamo = prestamo;
+	}
+	
+	public long getIdCuota() {
+		return idCuota;
+	}
 
+	protected void setIdCuota(long idCuota) {
+		this.idCuota = idCuota;
 	}
 
 	public int getNroCuota() {
@@ -124,7 +132,7 @@ public class Cuota {
 	public void setPrestamo(Prestamo prestamo) {
 		this.prestamo = prestamo;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Cuota [nroCuota=" + nroCuota + ", fechaVencimiento=" + fechaVencimiento + ", saldoPendiente="
@@ -132,5 +140,6 @@ public class Cuota {
 				+ cuota + ", deuda=" + deuda + ", cancelada=" + cancelada + ", fechaDePago=" + fechaDePago
 				+ ", punitorios=" + punitorios + "]";
 	}
+
 
 }

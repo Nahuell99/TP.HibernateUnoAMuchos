@@ -1,6 +1,8 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Set;
+
 import funciones.Funciones;
 
 public class Prestamo {
@@ -9,8 +11,10 @@ public class Prestamo {
 	private double monto;
 	private double interes;
 	private int cantCuotas;
-	private Cliente cliente;
 	private boolean cancelado;
+	private Cliente cliente;
+	private Set<Cuota> cuota; // ¿Porque utilizamos Set y no List?
+	
 
 	public Prestamo() {
 	}
@@ -80,6 +84,14 @@ public class Prestamo {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	public Set<Cuota> getCuota() {
+		return cuota;
+	}
+
+	public void setCuota(Set<Cuota> cuota) {
+		this.cuota = cuota;
+	}
 
 	public String toString() {
 		String prestamo = "id: " + idPrestamo + "\nPrestamo: $ " + monto + "\nFecha: "
@@ -91,4 +103,6 @@ public class Prestamo {
 	public void prestamoPago() {
 		//Si todas las 'Cuota' dentro del 'Prestamo' tienen el atributo 'Cancelada" en True, cambiar 'Cancelado' del 'Prestamo' a True.
 	}
+
+
 }

@@ -1,9 +1,13 @@
 package negocio;
 
 import dao.PrestamoDao;
+import negocio.CuotaABM;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+
 import datos.Cliente;
+import datos.Cuota;
 import datos.Prestamo;
 
 public class PrestamoABM {
@@ -25,11 +29,17 @@ public class PrestamoABM {
 	public int agregar(LocalDate fecha, double monto, double interes, int cantCuotas, Cliente cliente)
 			throws Exception {
 		ClienteABM clienteABM = new ClienteABM();
+		CuotaABM cuotaABM = new CuotaABM();
 		if (clienteABM.traer(cliente.getIdCliente()) == null) {
 			throw new Exception("Se esta queriendo insertar un 'Prestamo' en la DB sobre un Cliente que no existe.");
 		}
-		Prestamo c = new Prestamo(fecha, monto, interes, cantCuotas, cliente);
-		return dao.agregar(c);
+		Prestamo p = new Prestamo(fecha, monto, interes, cantCuotas, cliente);
+		Set<Cuota> cuotas = cuotaABM.generarCuotas(fecha, monto, interes, cantCuotas, p);
+		p.setCuota(cuotas);
+		
+		System.out.println(p + "\n\n\n");
+		
+		return dao.agregar(p);
 	}
 
 	public void modificar(Prestamo prestamo) throws Exception {
@@ -38,11 +48,11 @@ public class PrestamoABM {
 
 	public void eliminar(long idPrestamo) throws Exception {
 		if (this.traerPrestamo(idPrestamo) == null) {
-			throw new Exception(
-					"Se esta queriendo eliminar un 'Prestamo' en la DB con el ID '" + idPrestamo + "' que no existente.");
+			throw new Exception("Se esta queriendo eliminar un 'Prestamo' en la DB con el ID '" + idPrestamo
+					+ "' que no existente.");
 		}
-		Prestamo c = this.traerPrestamo(idPrestamo);
-		dao.eliminar(c);
+		Prestamo p = this.traerPrestamo(idPrestamo);
+		dao.eliminar(p);
 	}
 
 }

@@ -21,7 +21,7 @@ public class Cuota {
 	}
 
 	public Cuota(int nroCuota, LocalDate fechaVencimiento, double saldoPendiente, double amortizacion,
-			double interesCuota, double cuota, double deuda, boolean cancelada, LocalDate fechaDePago,
+			double interesCuota, double cuota, double deuda, LocalDate fechaDePago,
 			double punitorios, Prestamo prestamo) {
 		super();
 		this.nroCuota = nroCuota;
@@ -31,7 +31,7 @@ public class Cuota {
 		this.interesCuota = interesCuota;
 		this.cuota = cuota;
 		this.deuda = deuda;
-		this.cancelada = cancelada;
+		this.cancelada = false;
 		this.fechaDePago = fechaDePago;
 		this.punitorios = punitorios;
 		this.prestamo = prestamo;

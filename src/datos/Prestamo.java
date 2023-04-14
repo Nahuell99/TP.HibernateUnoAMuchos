@@ -96,7 +96,7 @@ public class Prestamo {
 	public String toString() {
 		String prestamo = "id: " + idPrestamo + "\nPrestamo: $ " + monto + "\nFecha: "
 				+ Funciones.traerFechaCorta(fecha) + "\nInteres: " + interes + "\nCant.de Cuotas: " + cantCuotas
-				+ "\nCancelado: " + cancelado + "\nidCliente: " + getCliente().getIdCliente();
+				+ "\nCancelado: " + cancelado + "\nidCliente: " + getCliente().getIdCliente() + "\nCuotas" + cuota;
 		return prestamo;
 	}
 	

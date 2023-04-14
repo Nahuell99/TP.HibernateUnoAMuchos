@@ -6,7 +6,7 @@
 			<generator class="identity" />
 		</id>
 		<property column="fecha" name="fecha" type="LocalDate" />
-		<property column="monto" name="monto" type="double" /> <!-- Tube que cambiar el Type de Long a Double porque sino no anda-->
+		<property column="monto" name="monto" type="double" />
 		<property column="interes" name="interes" type="double" />
 		<property column="cantCuotas" name="cantCuotas" type="int" />
 		<property column="cancelado" name="cancelado" type="boolean" />

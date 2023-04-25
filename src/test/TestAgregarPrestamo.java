@@ -30,7 +30,7 @@ public class TestAgregarPrestamo {
 			PrestamoABM.agregar(fecha, monto, interes, cantCuotas, cliente);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 
 }

@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 import funciones.Funciones;
 
@@ -76,6 +77,23 @@ public class Cliente {
 	public String toString() {
 		return ("ID: " + idCliente + "\nNombre y Apellido: " + apellido + " " + nombre + "\nDNI: " + dni
 				+ "\nF.de Nacimiento: " + Funciones.traerFechaCorta(fechaDeNacimiento) + "\nBaja: " + baja + "\n---\n");
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(idCliente);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return idCliente == other.idCliente;
 	}
 
 	public Set<Prestamo> getPrestamos() {

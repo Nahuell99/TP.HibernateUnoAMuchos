@@ -7,9 +7,9 @@ public class TestAgregarCliente {
 	public static void main(String[] args) {
 		ClienteABM clienteABM = new ClienteABM();
 
-		String apellido = "Ponce";
-		String nombre = "Nahuel";
-		int dni = 42231767;
+		String apellido = "Juan";
+		String nombre = "Carlos";
+		int dni = 42231589;
 		LocalDate fechaDeNacimiento = LocalDate.now();
 
 		try {

@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 import funciones.Funciones;
@@ -92,11 +93,30 @@ public class Prestamo {
 	public void setCuota(Set<Cuota> cuota) {
 		this.cuota = cuota;
 	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idPrestamo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Prestamo other = (Prestamo) obj;
+		return idPrestamo == other.idPrestamo;
+	}
 
 	public String toString() {
 		String prestamo = "id: " + idPrestamo + "\nPrestamo: $ " + monto + "\nFecha: "
 				+ Funciones.traerFechaCorta(fecha) + "\nInteres: " + interes + "\nCant.de Cuotas: " + cantCuotas
-				+ "\nCancelado: " + cancelado + "\nidCliente: " + getCliente().getIdCliente() + "\nCuotas" + cuota;
+				+ "\nCancelado: " + cancelado + "\nidCliente: " + getCliente().getIdCliente();
 		return prestamo;
 	}
 	

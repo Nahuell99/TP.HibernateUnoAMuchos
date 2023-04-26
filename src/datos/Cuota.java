@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Cuota {
 	private long idCuota;
@@ -141,5 +142,21 @@ public class Cuota {
 				+ ", punitorios=" + punitorios + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(idCuota);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cuota other = (Cuota) obj;
+		return idCuota == other.idCuota;
+	}
 
 }

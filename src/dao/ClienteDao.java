@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -7,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import datos.Cliente;
+import datos.Prestamo;
 
 public class ClienteDao {
 	private static Session session;
@@ -90,7 +92,7 @@ public class ClienteDao {
 		List<Cliente> lista = null;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Cliente c order by c.apellido asc c.nombre asc").list();
+			lista = (List<Cliente>) session.createQuery("from Cliente c order by c.apellido asc, c.nombre asc").list();
 		} finally {
 			session.close();
 		}
@@ -108,6 +110,79 @@ public class ClienteDao {
 			session.close();
 		}
 		return objeto;
+	}
+
+	// 1. Traet todos los prestamos de un cliente (Sin usar el set de Prestamos en
+	// Cliente)
+	@SuppressWarnings("unchecked")
+	public List<Prestamo> traerPrestamos(Cliente cliente) {
+		List<Prestamo> lista = null;
+		System.out.println(cliente.getIdCliente());
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Prestamo p join fetch p.cliente c where c.idCliente=" + cliente.getIdCliente()).list();
+			
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
+	// 2. Traer todos los prestamos de un cliente que esten impagos
+	@SuppressWarnings("unchecked")
+	public List<Prestamo> traerPrestamosPorEstado(Cliente cliente, boolean prestamoFinalizado) {
+		List<Prestamo> lista = null;
+		try {
+			iniciaOperacion();
+			String hql = "from Prestamo p join fetch p.cliente c where c.idCliente=" + cliente.getIdCliente()
+					+ "AND p.cancelado =" + prestamoFinalizado;
+			lista = session.createQuery(hql).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
+	// 3. Traer todos los prestamos de una fecha
+	@SuppressWarnings("unchecked")
+	public List<Prestamo> traerPrestamosFecha(LocalDate fecha) {
+		List<Prestamo> lista = null;
+		try {
+			iniciaOperacion();
+			String hql = "from Prestamo p where p.fecha='" + fecha + "'";
+			lista = session.createQuery(hql).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
+	// 4. Traer todos los prestamos de un rango
+	@SuppressWarnings("unchecked")
+	public List<Prestamo> traerPrestamosEntreFecha(LocalDate desde, LocalDate hasta) {
+		List<Prestamo> lista = null;
+		try {
+			iniciaOperacion();
+			String hql = "from Prestamo p where p.fecha > '" + desde + "' and p.fecha < '" + hasta + "'";
+			lista = session.createQuery(hql).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
+	// 5. Traer todos los prestamos que tengan una cuota que vence en una Fecha
+	@SuppressWarnings("unchecked")
+	public List<Prestamo> traerPrestamosCuotaAVencer(LocalDate fechavencimientoCuuota) {
+		List<Prestamo> lista = null;
+		try {
+			iniciaOperacion();
+			String hql = "from Prestamo p join fetch p.cuota c where c.fechaVencimiento = '" + fechavencimientoCuuota + "'";
+			lista = session.createQuery(hql).list();
+		} finally {
+			session.close();
+		}
+		return lista;
 	}
 
 }

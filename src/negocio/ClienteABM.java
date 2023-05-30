@@ -11,7 +11,7 @@ public class ClienteABM {
 
 	public Cliente traer(long idCliente) throws Exception {
 		if (dao.traer(idCliente) == null) {
-			throw new Exception("Cliente no existe");
+			throw new Exception("Cliente no existe.");
 		}
 		return dao.traer(idCliente);
 	}
